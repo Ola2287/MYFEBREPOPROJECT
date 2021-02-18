@@ -43,13 +43,13 @@ pipeline {
     stage ('DEV Deploy') {
       steps {
       echo "deploying to DEV Env "
-      deploy adapters: [tomcat9(credentialsId: '138b81b8-ac50-456d-8656-0c7adb40728c, path: '', url: 'http://13.59.55.58:8080)], contextPath: null, war: '**/*.war'
+      deploy adapters: [tomcat9(credentialsId: '138b81b8-ac50-456d-8656-0c7adb40728c', path: '', url: 'http://13.59.55.58:8080')], contextPath: null, war: '**/*.war'
       }
     }
     stage ('Slack Notification') {
       steps {
         echo "deployed to DEV Env successfully"
-        slackSend(channel:'devopsola', message: "Job is successful, here is the info - Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+        slackSend(channel:'jamodevops', message: "Job is successful, here is the info - Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
       }
     }
          stage ('DEV Approve') {
@@ -63,7 +63,7 @@ pipeline {
      stage ('QA Deploy') {
       steps {
         echo "deploying to QA Env "
-        deploy adapters: [tomcat9(credentialsId: '138b81b8-ac50-456d-8656-0c7adb40728c, path: '', url: 'http://13.59.55.58:8080)], contextPath: null, war: '**/*.war'
+        deploy adapters: [tomcat9(credentialsId: '138b81b8-ac50-456d-8656-0c7adb40728c', path: '', url: 'http://13.59.55.58:8080')], contextPath: null, war: '**/*.war'
         }
     }
     stage ('QA Approve') {
@@ -77,7 +77,7 @@ pipeline {
     stage ('Slack Notification for QA Deploy') {
       steps {
         echo "deployed to QA Env successfully"
-        slackSend(channel:'your slack devopsola', message: "Job is successful, here is the info - Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+        slackSend(channel:'your slack jamodevops', message: "Job is successful, here is the info - Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
       }
     }  
   }
